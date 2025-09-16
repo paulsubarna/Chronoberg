@@ -1,1 +1,1 @@
-# Official repository of ChronoBerg
+# Official Repository of ChronoBerg
