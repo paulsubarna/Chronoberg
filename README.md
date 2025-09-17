@@ -12,6 +12,8 @@ Catalog:
 - [x] Hate Speech Detection Models
 - [x] Sequential training of LLMs on ChronoBerg
 
+## Dataset
+The dataset is available at Huggingface ![ChronoBerg](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main)
 
 ## Lexical Analysis
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
