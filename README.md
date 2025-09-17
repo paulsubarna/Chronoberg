@@ -5,4 +5,13 @@ Large language models (LLMs) excel at operating at scale by leveraging social me
 
 ![ChronoBerg](https://github.com/paulsubarna/Chronoberg/blob/main/figures/chrono_flow.png)
 
+To install the dependencies, run <pre/>pip install -r requirements.txt</pre> 
+
+Catalog:
+- [x] ChronoBerg: Dataset and Statistics
+- [x] Lexical Analysis
+- [x] Hate Speech Detection Models
+- [x] Sequential training of LLMs on ChronoBerg
+
+
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
