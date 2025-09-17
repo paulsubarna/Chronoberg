@@ -15,3 +15,6 @@ Catalog:
 
 ## Lexical Analysis
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
+
+## Sequential training LLMS
+
