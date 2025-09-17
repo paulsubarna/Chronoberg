@@ -13,7 +13,13 @@ Catalog:
 - [x] Sequential training of LLMs on ChronoBerg
 
 ## Dataset
-The dataset is available at Huggingface ![ChronoBerg](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main)
+The dataset is available at Huggingface [ChronoBerg](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main)
+Dataset Catalog:
+- [x] ChronoBerg raw non-annotated [non-annotated](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/dataset)
+- [x] ChronoBerg: sentence-level valence annotated (for each time interval: 50 year span) [annotated](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/dataset)
+- [x] [Valence Lexicons](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/lexicons) 
+- [x] [Dominance Lexicons](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/lexicons)
+- [x] [Arousal Lexicons](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/lexicons)
 
 ## Lexical Analysis
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
