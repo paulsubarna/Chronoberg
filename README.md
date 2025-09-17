@@ -27,7 +27,7 @@ Dataset Catalog:
 ## Sequential training LLMS
 
 Method | Perplexity | Forward Gen. | Best Case | Worst Case 
---- | :---: | :---: | :---: 
+--- | :---: | :---: | :---: |:---:
 Sequential FT | 34\% $\uparrow$ | 33\% $\uparrow$ | 4.57 (1750--99) | 6.77 (1950--2000) 
 EWC           | 12\% $\uparrow$ | 29\% $\uparrow$ | 4.78 (1800--49) | 5.77 (1950--2000) 
 LoRA          | 15\% $\uparrow$ | 22\% $\uparrow$ | 4.81 (1850--99) | 5.89 (1950--2000) 
