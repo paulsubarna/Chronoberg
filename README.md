@@ -13,4 +13,5 @@ Catalog:
 - [x] Sequential training of LLMs on ChronoBerg
 
 
+## Lexical Analysis
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
