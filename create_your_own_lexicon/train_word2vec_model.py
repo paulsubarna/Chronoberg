@@ -24,8 +24,6 @@ def main():
             text = text.replace('\n', ' ')
             # Remove all kinds of quotation marks
             text = re.sub(r'[\'\"]', '', text)
-            #text = re.sub(r'â\x80\x9d', '', text)
-            #text = re.sub(r'â\x80\x94â\x80\x94â\x80\x9c', ' ',text) 
             text = re.sub('\.', ' ', text)
             text = re.sub(r'[\x80-\xFF]', '', text)
             text = re.sub(r'\d+','', text) 
