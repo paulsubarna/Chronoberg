@@ -33,7 +33,7 @@ To work with the lexicons provided with ChronoBerg, we also made available the f
 Find the pretrained models here: [word2vec](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset)
 
 Train your own word2vec models:
-<pre>python train_word2vec_model.py --epochs 10 --window 10 --workers 6 --vector-size 300
+<pre/>python train_word2vec_model.py --epochs 10 --window 10 --workers 6 --vector-size 300
 </pre>
 
 ## Sequential training LLMS
