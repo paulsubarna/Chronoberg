@@ -13,9 +13,9 @@ Catalog:
 - [x] Sequential training of LLMs on ChronoBerg
 
 ## Dataset
-The dataset is available at Huggingface [ChronoBerg](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main)
+The dataset is available at Huggingface [ChronoBerg](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main)
 Dataset Catalog:
-- [x] ChronoBerg raw non-annotated [non-annotated](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/dataset)
+- [x] ChronoBerg raw non-annotated [non-annotated](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset)
 - [x] ChronoBerg: sentence-level valence annotated (for each time interval: 50 year span) [annotated](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/dataset)
 - [x] [Valence Lexicons]([https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/lexicons](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/Valence_lexicon)) 
 - [x] [Dominance Lexicons]([https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/lexicons](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/Dominance_lexicon))
@@ -26,6 +26,11 @@ We have provided notebooks describing how to work with the provided lexicons.
 - Notebook on analyzing words that have undergone semantic shifts
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
 - Notebook on determining affective connotations for sentences in ChronoBerg
+
+## Create your own Lexicons
+One could also create their own lexicons by training their own Word2Vec models to learn their vector embeddings for each word in Chronoberg. 
+To work with the lexicons provided with ChronoBerg, we also made available the five pre-trained models on each 50-year time-interval. 
+Find the pretrained models here: [word2vec][https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset]
 
 ## Sequential training LLMS
 
