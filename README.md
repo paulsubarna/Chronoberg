@@ -30,11 +30,11 @@ We have provided notebooks describing how to work with the provided lexicons.
 ## Create your own Lexicons
 One could also create their own lexicons by training their own Word2Vec models to learn their vector embeddings for each word in Chronoberg. 
 To work with the lexicons provided with ChronoBerg, we also made available the five pre-trained models on each 50-year time-interval. 
-Find the pretrained models here: [word2vec](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset)
+**pretrained checkpoints** : 
 Model-Type | 1750-99 | 1800-49 | 1850-99 | 1900-49 | 1950-99 |
 --- | :---: | :---: | :---: |:---: |:---:
-word2vec | [word2vec_1750](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1800](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) [word2vec](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) |
-EWC           | 12\% $\uparrow$ | 29\% $\uparrow$ | 4.78 (1800--49) | 5.77 (1950--2000) 
+word2vec | [word2vec_1750](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1800](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1850](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1900](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) [word2vec_1950](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) |
+
 
 Train your own word2vec models:
 <pre/>python train_word2vec_model.py --epochs 10 --window 10 --workers 6 --vector-size 300
