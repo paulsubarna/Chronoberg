@@ -1,6 +1,6 @@
-# Implementation for Continual Learning Methods EWC and LoRA. 
+# Implementation for Continual Learning Methods EWC, LoRA, and Sequential Training. 
 
-This folder contains the implementation for EWC and LoRA.
+This folder contains the implementation for EWC, LoRA and Sequential Training.
 
 ## Code Structure
 
