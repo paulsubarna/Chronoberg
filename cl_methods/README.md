@@ -1,4 +1,4 @@
-# Implementation for Continual Learning Methods EWC, LoRA, and Sequential Training. 
+#  Sequential training of LLMs on ChronoBerg
 
 This folder contains the implementation for EWC, LoRA and Sequential Training.
 
