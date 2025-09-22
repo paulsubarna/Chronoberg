@@ -22,7 +22,10 @@ Dataset Catalog:
 - [x] [Arousal Lexicons]([https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/lexicons](https://huggingface.co/datasets/sdp56/ChronoBerg/tree/main/Arousal_lexicon))
 
 ## Lexical Analysis
+We have provided notebooks describing how to work with the provided lexicons. 
+- Notebook on analyzing words that have undergone semantic shifts
 ![Lexical](https://github.com/paulsubarna/Chronoberg/blob/main/figures/lexical_analysis.png)
+- Notebook on determining affective connotations for sentences in ChronoBerg
 
 ## Sequential training LLMS
 
