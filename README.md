@@ -32,6 +32,9 @@ One could also create their own lexicons by training their own Word2Vec models t
 To work with the lexicons provided with ChronoBerg, we also made available the five pre-trained models on each 50-year time-interval. 
 Find the pretrained models here: [word2vec](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset)
 
+Train your own word2vec models:
+<pre>python train_word2vec_model.py --epochs 10 --window 10 --workers 6 --vector-size 300 <pre>
+
 ## Sequential training LLMS
 
 Method | Perplexity | Forward Gen. | Best Case | Worst Case 
