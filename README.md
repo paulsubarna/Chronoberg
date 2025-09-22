@@ -34,7 +34,7 @@ Find the pretrained models here: [word2vec](https://huggingface.co/datasets/chb1
 
 Train your own word2vec models:
 <pre>python train_word2vec_model.py --epochs 10 --window 10 --workers 6 --vector-size 300
-<pre>
+</pre>
 
 ## Sequential training LLMS
 
