@@ -1,3 +1,4 @@
+import argparse
 import json, re
 import os
 import nltk
@@ -17,15 +18,20 @@ from gensim.parsing.preprocessing import preprocess_string, preprocess_documents
 parser = argparse.ArgumentParser(description='PyTorch Intrinsic Ordering Dataset Metrics Correlation')
 
 # Dataset and loading
-parser.add_argument('--count', default =1, type=int, help='count the number of words')
+parser.add_argument('--data-folder', default ='', type=str, help='data folder')
+parser.add_argument('--save-dir', default ='', type=str, help='save directory')
+parser.add_argument('--vector-size', default =300, type=int, help='vector size')
+parser.add_argument('--window', default =10, type=int, help='window size')
+parser.add_argument('--workers', default =6, type=int, help='number of workers')
+parser.add_argument('--epochs', default =10, type=int, help='number of epochs')
 args = parser.parse_args()
 
 
-def main():
+def main(args):
     c=0
     nltk.download('punkt_tab')
     data_dict = {'year': [], 'text': []}
-    with open('/app/src/ChronoBerg/cade/pg_books_historic.jsonl', 'r', encoding='utf-8') as dataset_in:
+    with open(os.path.join(args.data_folder, 'ChronoBerg_raw.jsonl'), 'r', encoding='utf-8') as dataset_in:
         for line in tqdm(dataset_in):
             file = json.loads(line)
             text = file['text']
@@ -63,17 +69,13 @@ def main():
     print(len(sentence))
 
     text_data_one = data_dict['text'][:49]
-    #print(len(text_data))
-    #text_data[0]
     text_one = []
     for text in tqdm(text_data_one):
         sentence = sent_tokenize(text)
         text_one.append(sentence)
-        #print(len(sentence))
+
 
     text_data_sec = data_dict['text'][50:99]
-    #print(len(text_data))
-    #text_data[0]
     text_sec = []
     for text in tqdm(text_data_sec):
         sentence = sent_tokenize(text)
@@ -81,25 +83,19 @@ def main():
         #print(len(sentence))
 
     text_data_trd = data_dict['text'][100:149]
-    #print(len(text_data))
-    #text_data[0]
     text_trd = []
     for text in tqdm(text_data_trd):
         sentence = sent_tokenize(text)
         text_trd.append(sentence)
-        #print(len(sentence))
+
 
     text_data_four = data_dict['text'][150:199]
-    #print(len(text_data))
-    #text_data[0]
     text_four = []
     for text in tqdm(text_data_four):
         sentence = sent_tokenize(text)
         text_four.append(sentence)
 
     text_data_five = data_dict['text'][200:249] 
-    #print(len(text_data))
-    #text_data[0]
     text_five = []
     for text in tqdm(text_data_five):
         sentence = sent_tokenize(text)
@@ -154,41 +150,38 @@ def main():
         text_five[i] = remove_stopwords(text_five[i])
         text_five[i] = text_five[i].lower()
 
-    with open('/app/src/ChronoBerg/cade/text_t.txt', 'a', encoding='utf-8') as file:
+    with open(os.path.join(args.save_dir, 'text_full.txt'), 'a', encoding='utf-8') as file:
         for line in text_t:
             file.write(line + '. ')
 
-    with open('/app/src/ChronoBerg/cade/text_one.txt', 'a', encoding='utf-8') as file:
+    with open(os.path.join(args.save_dir, 'text_one.txt'), 'a', encoding='utf-8') as file:
         for line in text_one:
             file.write(line + '. ')
 
-    with open('/app/src/ChronoBerg/cade/text_sec.txt', 'a', encoding='utf-8') as file:
+    with open(os.path.join(args.save_dir, 'text_sec.txt'), 'a', encoding='utf-8') as file:
         for line in text_sec:
             file.write(line + '. ')
 
-    with open('/app/src/ChronoBerg/cade/text_trd.txt', 'a', encoding='utf-8') as file:
+    with open(os.path.join(args.save_dir, 'text_trd.txt'), 'a', encoding='utf-8') as file:
         for line in text_trd:
             file.write(line + '. ')
-    
-    with open('/app/src/ChronoBerg/cade/text_four.txt', 'a', encoding='utf-8') as file:
+
+    with open(os.path.join(args.save_dir, 'text_four.txt'), 'a', encoding='utf-8') as file:
         for line in text_four:
             file.write(line + '. ')
-    with open('/app/src/ChronoBerg/cade/text_five.txt', 'a', encoding='utf-8') as file:
+    with open(os.path.join(args.save_dir, 'text_five.txt'), 'a', encoding='utf-8') as file:
         for line in text_five:
-            file.write(line + '. ')
+            file.write(line + '. ')  
 
-    #os.chdir('/app/src/ChronoBerg/cade/')
-    
+    aliger = CADE(size= args.vector_size , window= args.window, min_count= 1, workers= args.workers, siter= args.epochs)
+    aliger.train_compass(os.path.join(args.save_dir, 'text_full.txt'), overwrite= False, save= True)
 
-    aliger = CADE(size= 300 , window= 10, min_count= 1, workers= 6, siter= 10)
-    aliger.train_compass('/app/src/ChronoBerg/cade/text_t.txt', overwrite= False, save= True) 
-
-    slice_one = aliger.train_slice('/app/src/ChronoBerg/cade/text_one.txt', save=True)
-    slice_two = aliger.train_slice('/app/src/ChronoBerg/cade/text_sec.txt', save=True)
-    slice_three = aliger.train_slice('/app/src/ChronoBerg/cade/text_trd.txt', save=True)
-    slice_four = aliger.train_slice('/app/src/ChronoBerg/cade/text_four.txt', save=True)
-    slice_five = aliger.train_slice('/app/src/ChronoBerg/cade/text_five.txt', save=True)
+    slice_one = aliger.train_slice(os.path.join(args.save_dir, 'text_one.txt'), save=True)
+    slice_two = aliger.train_slice(os.path.join(args.save_dir, 'text_sec.txt'), save=True)
+    slice_three = aliger.train_slice(os.path.join(args.save_dir, 'text_trd.txt'), save=True)
+    slice_four = aliger.train_slice(os.path.join(args.save_dir, 'text_four.txt'), save=True)
+    slice_five = aliger.train_slice(os.path.join(args.save_dir, 'text_five.txt'), save=True)
 
 
 if __name__ == '__main__':
-    main()
+    main(args)
