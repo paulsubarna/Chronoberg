@@ -42,12 +42,5 @@ torch==2.4.1
 torchvision==0.19.1
 ```
 
-## Quick Start
 
-### 1. Installation
-
-```bash
-# Install dependencies
-[TODO] : pip install -r requirements.txt
-```
 
