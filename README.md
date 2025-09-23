@@ -43,7 +43,7 @@ Train your own word2vec models:
 
 ## Sequential training LLMS
 
-#### 2. Data and Model Preparation
+#### 1. Data and Model Preparation
 
 -   1. Extract the provided test set from the full dataset. 
 
@@ -51,7 +51,7 @@ Train your own word2vec models:
 
 -   3. Load and save model using "cl_methods/model/init_model.py"
 
-#### 3. Training and Evaluating
+#### 2. Training and Evaluating
 
 To train, run: 
 
@@ -69,7 +69,7 @@ Key parameters in the training script:
 -   `--num_train_epochs`: Number of training epochs per task (default: 30)
 
 
-## Evaluate
+#### Evaluate
 To evaluate on the two test sets (valence_shifting and valence stable) and calculate the perplexities, run: 
 
 -   1. For EWC and ST: 
