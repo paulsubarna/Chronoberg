@@ -13,6 +13,14 @@ from cade.cade import CADE
 from gensim.parsing.preprocessing import remove_stopwords, strip_punctuation, strip_multiple_whitespaces, strip_numeric
 from gensim.parsing.preprocessing import preprocess_string, preprocess_documents
 
+
+parser = argparse.ArgumentParser(description='PyTorch Intrinsic Ordering Dataset Metrics Correlation')
+
+# Dataset and loading
+parser.add_argument('--count', default =1, type=int, help='count the number of words')
+args = parser.parse_args()
+
+
 def main():
     c=0
     nltk.download('punkt_tab')
