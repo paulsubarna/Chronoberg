@@ -72,13 +72,13 @@ Key parameters in the training script:
 #### Evaluate
 To evaluate on the two test sets (valence_shifting and valence stable) and calculate the perplexities, run: 
 
--   1. For EWC and ST: 
+-  For EWC and ST: 
 ```
 python eval.py --model_dir ./outputs/$model_dir --test_data_dir ./data
 
 ```
 
--   2. For LoRA: 
+-  For LoRA: 
 ```
 python eval_lora.py --model_dir ./outputs/$model_dir --test_data_dir ./data
 
