@@ -1,4 +1,3 @@
-# This is the script to run the tran and evaluate EWC method on the TRACE continual learning benchmark.
 #get current time:
 now=$(date +"%m%d_%H%M%S")
 #get GPUs:
