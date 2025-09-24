@@ -93,4 +93,5 @@ EWC           | 12\% $\uparrow$ | 29\% $\uparrow$ | 4.65 (1800--49) | 6.77 (1950
 LoRA          | 15\% $\uparrow$ | 27\% $\uparrow$ | 4.48 (1850--99) | 6.19 (1950--2000) 
 
 
-We would like to 
+## Credits 
+* Our implentation of cade is inspired from the official repository of [CADE]([https://github.com/mgermain/MADE/tree/master](https://github.com/vinid/cade)). 
