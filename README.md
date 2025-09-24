@@ -94,4 +94,4 @@ LoRA          | 15\% $\uparrow$ | 27\% $\uparrow$ | 4.48 (1850--99) | 6.19 (1950
 
 
 ## Credits 
-* Our implentation of cade is inspired from the official repository of [CADE]([https://github.com/mgermain/MADE/tree/master](https://github.com/vinid/cade)). 
+* Our implentation of cade is inspired from the official repository of [CADE]([https://github.com/mgermain/MADE/tree/master](https://github.com/vinid/cade). 
