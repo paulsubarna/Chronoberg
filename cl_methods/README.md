@@ -13,11 +13,11 @@ This folder contains the implementation for EWC, LoRA and Sequential Training.
 │   |    └── test.json/     
 │   ├── dataset_name_2/      # name of the second task (eg.: 1800)
 ├── model/                   # Model implementations
-│   ├── ewc/                 
-│   │   └── ewc.py           # EWC implementation
-│   ├── lora/                 
-│   │   └── lora.py          # LoRA implementation
+│   ├── regular/                 
+│   │   └── EWC.py           # EWC implementation
+│   ├── lora.py              # LoRA implementation          
 │   └── base_model.py        # Base model implementation
+│   └── init_model.py        # Download initial model to /PTM
 ├── scripts/                 # Training scripts 
 ├── training/                # Training related code
 │   ├── main.py              # Main training script
@@ -26,8 +26,7 @@ This folder contains the implementation for EWC, LoRA and Sequential Training.
 │   ├── data/                # Data processing utilities
 │   ├── my_peft/             # Custom PEFT implementations
 ├── eval/                    # Evaluate on valence stable and valence shifting test sets
-│   ├── eval_lora.py         # Calculate perplexity for LoRA 
-│   ├── eval.py              # Calculate perplexity for EWC and ST
+│   ├── eval_perplexity.py         # Calculate perplexity for LoRA 
 ```
 
 ## Requirements
