@@ -18,6 +18,7 @@ This folder contains the implementation for EWC, LoRA and Sequential Training.
 │   ├── lora.py              # LoRA implementation          
 │   └── base_model.py        # Base model implementation
 │   └── init_model.py        # Download initial model to /PTM
+├── PTM/                     # Place models here 
 ├── scripts/                 # Training scripts 
 ├── training/                # Training related code
 │   ├── main.py              # Main training script
