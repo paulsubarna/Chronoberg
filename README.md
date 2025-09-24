@@ -49,7 +49,7 @@ Train your own word2vec models:
 
 -   2. Place the splits within "data" folder as shown in the structure above. 
 
--   3. Load and save model using "cl_methods/model/init_model.py"
+-   3. Load and save Pythia model using "cl_methods/model/init_model.py"
 
 #### 2. Training and Evaluating
 
