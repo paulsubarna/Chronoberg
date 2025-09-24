@@ -91,3 +91,6 @@ Method | Perplexity | Forward Gen. | Best Case | Worst Case
 Sequential FT | 34\% $\uparrow$ | 33\% $\uparrow$ | 4.58 (1750--99) | 6.64 (1950--2000) 
 EWC           | 12\% $\uparrow$ | 29\% $\uparrow$ | 4.65 (1800--49) | 6.77 (1950--2000) 
 LoRA          | 15\% $\uparrow$ | 27\% $\uparrow$ | 4.48 (1850--99) | 6.19 (1950--2000) 
+
+
+We would like to 
