@@ -26,7 +26,7 @@ This folder contains the implementation for EWC, LoRA and Sequential Training.
 │   ├── data/                # Data processing utilities
 │   ├── my_peft/             # Custom PEFT implementations
 ├── eval/                    # Evaluate on valence stable and valence shifting test sets
-│   ├── eval_perplexity.py         # Calculate perplexity for LoRA 
+│   ├── eval_perplexity.py         # Calculate perplexity for the CL models
 ```
 
 ## Requirements
