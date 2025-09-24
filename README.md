@@ -56,8 +56,8 @@ Train your own word2vec models:
 To train, run: 
 
 ```
-# Run training script with default parameters ("ewc.sh" or "lora.sh"):
-sh scripts/ewc/ewc.sh
+# Run training script with default parameters ("EWC.sh" or "lora.sh"):
+bash scripts/full_grad_methods/EWC.sh
 ```
 
 Key parameters in the training script:
@@ -72,18 +72,10 @@ Key parameters in the training script:
 #### Evaluate
 To evaluate on the two test sets (valence_shifting and valence stable) and calculate the perplexities, run: 
 
--  For EWC and ST: 
 ```
-python eval.py --model_dir ./outputs/$model_dir --test_data_dir ./data
+python eval_perplexity.py --model_dir $model_dir --stable_path $path_to_json --shift_path $path_to_json --batch_size 2
 
 ```
-
--  For LoRA: 
-```
-python eval_lora.py --model_dir ./outputs/$model_dir --test_data_dir ./data
-
-```
-
 A comparison of all continual learning strategies can be found below. 
 
 Method | Perplexity | Forward Gen. | Best Case | Worst Case 
