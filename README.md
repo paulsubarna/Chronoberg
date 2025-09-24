@@ -34,7 +34,7 @@ To work with the lexicons provided with ChronoBerg, we also made available the f
 **Pretrained Checkpoints** : 
 Model-Type | 1750-99 | 1800-49 | 1850-99 | 1900-49 | 1950-99 |
 --- | :---: | :---: | :---: |:---: |:---:
-word2vec | [word2vec_1750](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1800](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1850](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1900](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) | [word2vec_1950](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset) |
+word2vec | [word2vec_1750](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1750.model) | [word2vec_1800](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1800.model) | [word2vec_1850](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1850.model) | [word2vec_1900](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1900.model) | [word2vec_1950](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1950.model) |
 
 
 Train your own word2vec models:
