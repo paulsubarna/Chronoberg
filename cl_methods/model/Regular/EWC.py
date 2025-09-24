@@ -7,6 +7,7 @@ from tqdm.auto import tqdm
 from torch import nn
 from model.base_model import CL_Base_Model
 from utils.model.model_utils import TIKTOK
+from utils.utils import print_rank_0
 
 
 class EWC(CL_Base_Model):
@@ -26,6 +27,7 @@ class EWC(CL_Base_Model):
         self.fisher = {}
         self.init_fisher()
         del self.params
+
 
     
     def init_fisher(self):
@@ -98,8 +100,56 @@ class EWC(CL_Base_Model):
             if n in self.fisher.keys():
                 p.register_hook(self.save_grad(n))
     
-    
-    def train_one_task(self,
+    def train_one_task(self, task, i_task, epochs=40):
+        print_rank_0(f"Starting task = {task}", self.args.global_rank)
+
+        dataloader_train = self.train_task_list[task]
+        self.train_length = len(dataloader_train)
+        total_micro_batches = epochs * len(dataloader_train)
+        
+        # Detect device
+        device = torch.device("cuda") if self.args.local_rank == -1 else torch.device("cuda", self.args.local_rank)
+        if self.args.local_rank != -1:
+            torch.cuda.set_device(self.args.local_rank)
+
+        # Outer progress bar
+        progress_bar = tqdm(total=total_micro_batches, leave=True, disable=(self.args.global_rank != 0))
+
+        self.model.train()
+        for epoch in range(epochs):
+            print_rank_0(f"Epoch {epoch+1}/{epochs}, Micro-batches: {len(dataloader_train)}", self.args.global_rank)
+
+            for step, batch in enumerate(dataloader_train):
+                del batch['sources']
+                batch = {k: batch[k].to(device) for k in batch}
+
+                # Forward + compute loss
+                loss = self.train_step(batch)
+
+                # Backward + optimizer step
+                self.model.backward(loss)
+                self.model.step()
+
+                # Update Fisher info
+                self._update_fisher()
+
+                # Update progress bar
+                if self.args.global_rank == 0:
+                    progress_bar.update(1)
+                    progress_bar.set_description(
+                        f"Epoch {epoch+1}, Step {step+1}, Loss: {loss.item():.4f}", refresh=True
+                    )
+
+                    # Optional: print per real optimizer step
+                    accum_steps = self.model.gradient_accumulation_steps()
+                    if (step + 1) % accum_steps == 0:
+                        real_step = (step + 1) // accum_steps
+                        print(f"Epoch {epoch+1}, Step {real_step}, Loss: {loss.item():.4f}")
+
+        progress_bar.close()
+        print_rank_0(f"Finished training task {task}", self.args.global_rank)
+
+    """def train_one_task(self,
                        task,
                        i_task,
                        epochs=40):
@@ -133,7 +183,7 @@ class EWC(CL_Base_Model):
                 
                 self.tiktok.tik()
                 self._update_fisher()
-                self.tiktok.tok( 'update fisher time')
+                self.tiktok.tok( 'update fisher time')"""
 
 
     
@@ -150,4 +200,5 @@ class EWC(CL_Base_Model):
             self.save_model(i_task)
             
             
+
 

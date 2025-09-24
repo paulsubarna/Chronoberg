@@ -1,7 +1,74 @@
 ## The inputs must not be shuffled during evaluation.
 
+
 import re
+from rouge import Rouge
+from fuzzywuzzy import fuzz
 from datasets import load_metric
+from nltk.translate.bleu_score import sentence_bleu
+
+
+########################
+## BLEU
+########################
+def tokenize(text):
+    tokens = re.split(r'\s|\.', text)
+    tokens = [t for t in tokens if len(t) > 0]
+    return tokens
+
+
+def bleu_score(reference, hypothesis, gram):
+    reference_tokens = tokenize(reference)
+    hypothesis_tokens = tokenize(hypothesis)
+
+    if gram == 1:
+        bleu = sentence_bleu([reference_tokens], hypothesis_tokens, (1., ))  # BELU-1
+    elif gram == 2:
+        bleu = sentence_bleu([reference_tokens], hypothesis_tokens, (1. / 2., 1. / 2.))  # BELU-2
+    elif gram == 3:
+        bleu = sentence_bleu([reference_tokens], hypothesis_tokens, (1. / 3., 1. / 3., 1. / 3.))  # BELU-3
+    elif gram == 4:
+        bleu = sentence_bleu([reference_tokens], hypothesis_tokens, (1. / 4., 1. / 4., 1. / 4., 1. / 4.))  # BELU-4
+
+    return bleu
+
+
+def caculate_bleu(results, data, gram):
+    bleus = []
+    for output_id in range(len(results)):
+        prediction = results[output_id]
+        target = data[output_id] 
+        if prediction == "" or target == "":
+            continue
+        bleu = bleu_score(target, prediction, gram)
+        bleus.append(bleu)
+    avg_bleu = sum(bleus) / len(results)
+    return avg_bleu
+
+
+########################
+## Rouge-L
+########################
+def score_rouge(str1, str2):
+    rouge = Rouge(metrics=["rouge-l"])
+    if "\n" not in str2:     str2 = str2 + '\n'
+    scores = rouge.get_scores(str1, str2, avg=True)
+    rouge_l = scores['rouge-l']['f']
+    return rouge_l
+
+
+def caculate_rouge(results, data):
+    rouges = []
+    for output_id in range(len(results)):
+        prediction = results[output_id]
+        target = data[output_id] 
+        if prediction == "" or target == "":
+            continue
+        rouge = score_rouge(target, prediction)
+        rouges.append(rouge)
+    avg_rouge = sum(rouges) / len(results)
+    return avg_rouge
+
 
 ########################
 ## Accuracy (EM)
@@ -72,3 +139,27 @@ def caculate_f1(results, data):
         scores.append(score)
     avg_score = sum(scores) / len(results)
     return avg_score
+
+
+########################
+## fuzzywuzzy
+########################
+def caculate_fuzz(results, data):
+    scores = 0
+    for output_id in range(len(results)):
+        prediction = results[output_id]
+        target = data[output_id] 
+        if prediction == "" or target == "":
+            continue
+        scores += fuzz.ratio(prediction, target)
+    avg_score = scores / len(results) 
+    return avg_score
+
+
+########################
+## SARI
+########################
+def caculate_sari(inputs, results, data):
+    sari = load_metric("sari")
+    translation_result = sari.compute(sources=inputs, predictions=results, references=[[label] for label in data]),
+    return translation_result

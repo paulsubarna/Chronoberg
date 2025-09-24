@@ -6,4 +6,4 @@ Method2Class = {"EWC"      : EWC,
                 "base"     : CL_Base_Model,
                 "lora"     : lora}  # SeqLoRA
 
-AllDatasetName = ["1750","1800","1850","1900","1950" ]
+AllDatasetName = ["1750", "1800", "1850", "1900", "1950"]

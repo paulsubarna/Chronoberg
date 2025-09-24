@@ -10,7 +10,7 @@ import torch.nn.functional as F
 import json
 import os
 import time
-
+from evaluations import eval_FOMC
 from transformers import GenerationConfig
 generation_config = GenerationConfig(
     temperature=0.1,
@@ -60,7 +60,7 @@ class CL_Base_Model:
         return perplexity
 
 
-    def train_one_task(self, task, i_task, epochs):
+    """def train_one_task(self, task, i_task, epochs):
         if self.args.local_rank == -1:
             device = torch.device("cuda")
         else:
@@ -101,13 +101,52 @@ class CL_Base_Model:
             #     self.args.global_rank)
             # perplexity = self.perplexity_evaluation(eval_dataloader, device)
             # print_rank_0(f"ppl: {perplexity}", self.args.global_rank)
-            # self.model.tput_timer.update_epoch_count()
+            # self.model.tput_timer.update_epoch_count()"""
     
-    
+    def train_one_task(self, task, i_task, epochs):
+        device = torch.device("cuda") if self.args.local_rank == -1 else torch.device("cuda", self.args.local_rank)
+        if self.args.local_rank != -1:
+            torch.cuda.set_device(self.args.local_rank)
+
+        train_dataloader = self.train_task_list[task]
+        eval_dataloader = self.eval_task_list[task]
+        total_micro_batches = epochs * len(train_dataloader)
+
+        # tqdm progress bar
+        progress_bar = tqdm(total=total_micro_batches, leave=True, disable=(self.args.global_rank != 0))
+
+        self.model.train()
+        for epoch in range(epochs):
+            print_rank_0(f"Beginning of Epoch {epoch+1}/{epochs}, Total Micro Batches {len(train_dataloader)}",
+                            self.args.global_rank)
+
+            for step, batch in enumerate(train_dataloader):
+                del batch['sources']
+                batch = to_device(batch, device)
+
+                outputs = self.model(**batch, use_cache=False)
+                loss = outputs.loss
+
+                # backward and step
+                self.model.backward(loss)
+                self.model.step()
+
+                # update progress bar per micro-batch
+                if self.args.global_rank == 0:
+                    progress_bar.update(1)
+                    progress_bar.set_description(f"Epoch {epoch+1}, Micro-batch {step+1}, Loss: {loss.item():.4f}", refresh=True)
+
+                # print loss per real optimizer step (after gradient accumulation)
+                if self.args.global_rank == 0 and (step + 1) % self.model.gradient_accumulation_steps() == 0:
+                    real_step = (step + 1) // self.model.gradient_accumulation_steps()
+                    print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
+
+        progress_bar.close() 
+
     def train_continual(self):
-        for i_task, task in enumerate(self.train_task_list):
-            self.train_one_task(task, i_task, int(self.args.num_train_epochs[i_task]))
-            self.save_model(i_task)
+            for i_task, task in enumerate(self.train_task_list):
+                self.train_one_task(task, i_task, int(self.args.num_train_epochs[i_task]))
+                self.save_model(i_task)
 
     
     def save_model(self, round):
