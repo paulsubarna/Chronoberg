@@ -87,4 +87,16 @@ LoRA          | 15\% $\uparrow$ | 27\% $\uparrow$ | 4.48 (1850--99) | 6.19 (1950
 
 
 ## Credits 
-* Our implentation of cade is inspired from the official repository of [CADE](https://github.com/vinid/cade). 
+* Our implentation of cade is inspired from the official repository of [CADE](https://github.com/vinid/cade).
+
+ ```
+@misc{hegde2025chronobergcapturinglanguageevolution,
+      title={CHRONOBERG: Capturing Language Evolution and Temporal Awareness in Foundation Models}, 
+      author={Niharika Hegde and Subarnaduti Paul and Lars Joel-Frey and Manuel Brack and Kristian Kersting and Martin Mundt and Patrick Schramowski},
+      year={2025},
+      eprint={2509.22360},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2509.22360}, 
+}
+ ```
