@@ -13,9 +13,9 @@ Catalog:
 - [x] Sequential training of LLMs on ChronoBerg
 
 ## Dataset
-The dataset is available at Huggingface [ChronoBerg](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main)
+The dataset is available at Huggingface [ChronoBerg](https://huggingface.co/datasets/spaul25/ChronoBerg/tree/main)
 Dataset Catalog:
-- [x] ChronoBerg raw [non-annotated](https://huggingface.co/datasets/chb19/ChronoBerg/tree/main/dataset)
+- [x] ChronoBerg raw [non-annotated](https://huggingface.co/datasets/spaul25/ChronoBerg/tree/main/dataset)
 - [x] ChronoBerg: sentence-level valence annotated (for each time interval: 50 year span) [annotated]
 - [x] [Valence Lexicons]
 - [x] [Dominance Lexicons]
@@ -34,7 +34,7 @@ To work with the lexicons provided with ChronoBerg, we also made available the f
 **Pretrained Checkpoints** : 
 Model-Type | 1750-99 | 1800-49 | 1850-99 | 1900-49 | 1950-99 |
 --- | :---: | :---: | :---: |:---: |:---:
-word2vec | [word2vec_1750](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1750.model) | [word2vec_1800](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1800.model) | [word2vec_1850](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1850.model) | [word2vec_1900](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1900.model) | [word2vec_1950](https://huggingface.co/datasets/chb19/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1950.model) |
+word2vec | [word2vec_1750](https://huggingface.co/datasets/spaul25/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1750.model) | [word2vec_1800](https://huggingface.co/datasets/spaul25/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1800.model) | [word2vec_1850](https://huggingface.co/datasets/spaul25/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1850.model) | [word2vec_1900](https://huggingface.co/datasets/spaul25/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1900.model) | [word2vec_1950](https://huggingface.co/datasets/spaul25/ChronoBerg/blob/main/pretrained_models/word2vec_interval_1950.model) |
 
 
 Train your own word2vec models:
