@@ -1,10 +1,13 @@
+import sys 
+import subprocess
+
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'transformers'])
 from transformers import GPTNeoXConfig, GPTNeoXForCausalLM, AutoTokenizer
-import torch
 import os
 
 # Model name and save directory
-model_name = "EleutherAI/pythia-1.4b"
-save_dir = "/netscratch/nhegde/TreeLoRA/PTM/pythia-1.4b"
+model_name = "EleutherAI/pythia-160m"
+save_dir = "/app/src/Chronoberg/cl_methods/pythia_models"
 
 os.makedirs(save_dir, exist_ok=True)
 
@@ -25,4 +28,4 @@ model.resize_token_embeddings(len(tokenizer))
 model.save_pretrained(save_dir)
 tokenizer.save_pretrained(save_dir)
 
-print(f"Saved fresh Pythia-1.4B model and tokenizer to {save_dir}")
+print(f"Saved fresh Pythia-160m model and tokenizer to {save_dir}")

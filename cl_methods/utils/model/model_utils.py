@@ -13,8 +13,10 @@ from transformers import (
     AutoModel,
 )
 from huggingface_hub import snapshot_download
-from transformers.deepspeed import HfDeepSpeedConfig
+from transformers.integrations.deepspeed import HfDeepSpeedConfig
 from transformers import LlamaForCausalLM, LlamaConfig
+from transformers import GPTNeoXConfig, GPTNeoXForCausalLM
+
 
 from utils.utils import print_rank_0
 
@@ -86,3 +88,57 @@ def create_hf_model(model_class,
     model.resize_token_embeddings(int(8 * math.ceil(len(tokenizer) / 8.0)))  # make the vocab size multiple of 8
 
     return model
+
+
+
+def create_hf_model(
+    model_name_or_path,
+    tokenizer,
+
+    dtype="bf16",          # "bf16" | "fp16" | "fp32"
+    local_rank=0,
+    disable_dropout=False,
+):
+    """
+    Create Pythia-1.4B (GPT-NeoX) **from scratch**.
+    No pretrained weights are loaded.
+    """
+
+    assert dtype in ["bf16", "fp16", "fp32"]
+
+    torch_dtype = {
+        "bf16": torch.bfloat16,
+        "fp16": torch.float16,
+        "fp32": torch.float32,
+    }[dtype]
+    print("The dtype is : ", dtype)
+    model_config = AutoConfig.from_pretrained(model_name_or_path, trust_remote_code=True)
+    if disable_dropout:
+        model_config.dropout = 0.0
+    
+
+    
+    model = GPTNeoXForCausalLM.from_pretrained(model_name_or_path,
+                                        from_tf=bool(".ckpt" in model_name_or_path),
+                                        config=model_config,
+                                        trust_remote_code=True)
+
+    # Move to device & dtype
+    torch.cuda.set_device(local_rank)
+    model = model.to(
+        device=torch.device(f"cuda:{local_rank}"),
+        dtype=torch_dtype,
+    )
+
+    print_rank_0(
+        f"Initialized Pythia-1.4B from scratch "
+        f"(dtype={dtype}, vocab={model_config.vocab_size})"
+    )
+
+    model.config.end_token_id = tokenizer.eos_token_id
+    # compatible with OPT and llama2
+    model.config.pad_token_id = model.config.eos_token_id
+    model.resize_token_embeddings(int(8 * math.ceil(len(tokenizer) / 8.0)))  # make the vocab size multiple of 8
+
+    return model
+
